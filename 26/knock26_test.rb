@@ -1,37 +1,46 @@
-# No. 25 -10未満?、-10以上0未満?、0以上?
-# 整数値を入力させ、その値が-10未満ならrange 1、-10以上0未満であればrange 2、0以上であればrange 3、と表示するプログラムを作成せよ。
+# No. 26 switch-case
+# 整数値を入力させ、その値が1ならone、2ならtwo、3ならthree、それ以外ならothersと表示するプログラムをswicth-case文を使って作成せよ。
 #
 # 【実行例、下線部は入力例】
-# $ ./knock25
-# input number: -15
-# range 1
-# $ ./knock25
-# input number: -10
-# range 2
-# $ ./knock25
+# $ ./knock26
+# input number: 1
+# one
+# $ ./knock26
+# input number: 2
+# two
+# $ ./knock26
+# input number: 3
+# three
+# $ ./knock26
 # input number: 0
-# range 3
+# others
 # $
 
 require "minitest/autorun"
-require "./knock25.rb"
+require "./knock26.rb"
 
-class Knock25Test < Minitest::Test
+class Knock26Test < Minitest::Test
   def test_case_1
-    $stdin = StringIO.new("-15")
+    $stdin = StringIO.new("1")
 
-    assert_output("range 1") { Knock26.execute }
+    assert_output("one") { Knock26.execute }
   end
 
   def test_case_2
-    $stdin = StringIO.new("-10")
+    $stdin = StringIO.new("2")
 
-    assert_output("range 2") { Knock26.execute }
+    assert_output("two") { Knock26.execute }
   end
 
   def test_case_3
+    $stdin = StringIO.new("3")
+
+    assert_output("three") { Knock26.execute }
+  end
+
+  def test_case_4
     $stdin = StringIO.new("0")
 
-    assert_output("range 3") { Knock26.execute }
+    assert_output("others") { Knock26.execute }
   end
 end
