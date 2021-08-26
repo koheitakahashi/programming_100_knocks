@@ -12,7 +12,7 @@
 require "minitest/autorun"
 require "./knock23.rb"
 
-class Knock22Test < Minitest::Test
+class Knock23Test < Minitest::Test
   def test_case_1
     $stdin = StringIO.new("0")
 

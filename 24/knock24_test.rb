@@ -16,22 +16,22 @@
 require "minitest/autorun"
 require "./knock24.rb"
 
-class Knock22Test < Minitest::Test
+class Knock24Test < Minitest::Test
   def test_case_1
     $stdin = StringIO.new("-5")
 
-    assert_output("OK") { Knock24.execute }
+    assert_output("OK") { Knock25.execute }
   end
 
   def test_case_2
     $stdin = StringIO.new("10")
 
-    assert_output("OK") { Knock24.execute }
+    assert_output("OK") { Knock25.execute }
   end
 
   def test_case_3
     $stdin = StringIO.new("5")
 
-    assert_output("NG") { Knock24.execute }
+    assert_output("NG") { Knock25.execute }
   end
 end

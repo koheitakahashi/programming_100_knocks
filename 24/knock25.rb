@@ -1,4 +1,4 @@
-class Knock24
+class Knock25
   def self.execute
     input = $stdin.gets.chomp.to_i
 
