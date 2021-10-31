@@ -1,31 +1,22 @@
-class Knock59
-  MATRIX_SIZE = 9
-  MATRIX_ROW_SIZE = 3
+# No. 60 円
+# 中心座標を入力させ、横600縦400のウィンドウを開き、入力した座標に半径50の円を描くプログラムを作成せよ。
+#
+# 【実行例、下線部は入力例、実行結果は図の通り】
+# $ ./knock60
+# 円の中心座標を入力: 200 150
+# $
+#
 
-  def self.execute
-    new.execute
-  end
+require 'ruby2d'
 
-  def initialize
-    @input = $stdin.readlines
-  end
+x_point, y_point = $stdin.gets.chomp.split(' ').map(&:to_i)
 
-  def execute
-    sums = []
-    MATRIX_SIZE.times do |i|
-      taken_elements = formatted_input.map { |input| input[i] }
-      sums << taken_elements.sum
-    end
+set title: "knock60", background: 'white'
 
-    output = sums.each_slice(MATRIX_ROW_SIZE).map { |array| array.join("\t") }.join("\t\n")
-    $stdout.write("#{output}\n")
-  end
+Circle.new(
+  x: x_point,
+  y: y_point,
+  color: 'black'
+)
 
-  private
-    attr_reader :input
-
-    # return [[1, 2, 3, 4, 5, 6, 7, 8, 9], [2, 3, 4, 5, 6, 7, 8, 9, 1]]
-    def formatted_input
-      input.map { |string| string.split(' ').map(&:to_i) }.flatten.each_slice(MATRIX_SIZE).to_a
-    end
-end
+show
