@@ -1,9 +1,8 @@
 class Knock82
   STEP_NUMBER = 15
-  FIRST_STEP_ELEMENT = [1].freeze
-  FIRST_STEP_COUNT = 0
-  FIRST_AND_LAST_STEP_ELEMENT_IN_STEP = 1
-  PRECEDING_STEP_COUNT = 1
+  FIRST_AND_LAST_ELEMENT_IN_STEP = 1
+  FIRST_STEP_INDEX = 0
+  PRECEDING_COUNT = 1
 
   def self.execute
     new.execute
@@ -14,9 +13,8 @@ class Knock82
   end
 
   def execute
-    STEP_NUMBER.times do |i|
-      next @numbers << FIRST_STEP_ELEMENT if i == FIRST_STEP_COUNT
-      @numbers << add_pascal_triangle_elements(i, @numbers)
+    STEP_NUMBER.times do |step|
+      @numbers << build_pascal_triangle_row(step_count: step)
     end
 
     output_results(@numbers)
@@ -24,16 +22,17 @@ class Knock82
 
   private
 
-    def add_pascal_triangle_elements(add_count, numbers)
-      nested_numbers = []
-      add_count.times do |nested_index|
-        next nested_numbers << FIRST_AND_LAST_STEP_ELEMENT_IN_STEP if nested_index == FIRST_STEP_COUNT
-        next nested_numbers << FIRST_AND_LAST_STEP_ELEMENT_IN_STEP if nested_index == (add_count - PRECEDING_STEP_COUNT)
-
-        nested_numbers << (numbers[add_count - PRECEDING_STEP_COUNT][nested_index - PRECEDING_STEP_COUNT] + numbers[add_count - PRECEDING_STEP_COUNT][nested_index])
+    def build_pascal_triangle_row(step_count:)
+      (FIRST_STEP_INDEX..step_count).map do |index|
+        next FIRST_AND_LAST_ELEMENT_IN_STEP if index == FIRST_STEP_INDEX || index == step_count
+        calculate_current_element_from_numbers(step_count: step_count, position: index)
       end
+    end
 
-      nested_numbers
+    def calculate_current_element_from_numbers(step_count:, position:)
+      if (previous_step = @numbers[step_count - PRECEDING_COUNT])
+        previous_step[position - PRECEDING_COUNT] + previous_step[position]
+      end
     end
 
     def output_results(elements)
